@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Nice Watch</title>
+    <link rel="StyleSheet" href="LCDBOLD/font.css" type="text/css" />
+    
+</head>
+<body class="fontsforweb_fontid_523">
+
+ <div id="gain">
+ <img src="./img/watch_base.png" name="picture" onmousedown="anotherimg(1)" onmouseup="anotherimg(0)" alt="топ зображення" style="position: absolute;" />
+ </div>
+   
+    <p id="Atime" style="position: absolute;"> </p>
+    <p id="Adate" style="position: absolute;"> </p>
+    <p id="Aday" style="position: absolute;"> </p>
+
+    <script type="text/javascript">
+	
+        var iimg = new Array("./img/watch_base.png", "./img/watch_light.png");
+        function anotherimg(i) {
+            document.images["picture"].src = iimg[i];
+        }
+
+        
+        function clockon() {
+		var AdateStr="111";
+updateClock(); // початкове встановлення часу при старті 
+        /////////////////////////////////////////////////   ДАТА
+        var day = new Date();
+        var d = day.getDate();
+        var m = day.getMonth();
+        var y = day.getFullYear();
+        if((m+1)<10)
+            AdateStr=(d + "/0" + (m+1) + "/" + y );
+        else
+            AdateStr = (d + "/" + (m + 1) + "/" + y);
+       // Adate.innerText = AdateStr;
+		document.getElementById('Adate').innerHTML = AdateStr;
+
+        /////////////////////////////////////////////////   ЧАС
+        
+        var t = setInterval(updateClock(), 1000); // періодичне оновлення
+
+        
+
+        function updateClock() {
+            var d = new Date();
+            var AtimeStr = format(d.getHours()) + ":" +
+                format(d.getMinutes()) + ":" + format(d.getSeconds());
+            //Atime.innerText = AtimeStr;
+			document.getElementById('Atime').innerHTML = AtimeStr;
+        }
+		
+		function format(n) {
+            return n < 10 ? "0" + n : n;
+        }
+
+        /////////////////////////////////////////////////   ДЕНЬ ТИЖНЯ
+
+    var days = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+    var wday = day.getDay();
+    var AdayStr = (days[wday]);
+    document.getElementById('Aday').innerHTML = AdayStr;
+    setTimeout('clockon()', 1000);
+    }
+
+clockon();
+
+    </script>
+
+
+
+</body>
+</html>
